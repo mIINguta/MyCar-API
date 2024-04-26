@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCarApi\\MyCarApi.csproj": {}
+    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCarApi\\MyCarApi.csproj": {
+    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCarApi\\MyCarApi.csproj",
+        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj",
         "projectName": "MyCarApi",
-        "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCarApi\\MyCarApi.csproj",
+        "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj",
         "packagesPath": "C:\\Users\\gusta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCarApi\\obj\\",
+        "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gusta\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,6 +48,16 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

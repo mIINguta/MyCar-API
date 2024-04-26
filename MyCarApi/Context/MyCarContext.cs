@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using MyCarApi.Models;
 
 namespace MyCarApi.Context
 {
-    public class MyCarContext
+    public class MyCarContext : DbContext
     {
-        
+        public MyCarContext(DbContextOptions<MyCarContext> options) : base(options){
+
+        }
+
+        public DbSet<Usuario> Usuarios {get; set;}
     }
 }

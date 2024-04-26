@@ -1,5 +1,11 @@
+
+
+using Microsoft.EntityFrameworkCore;
+using MyCarApi.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<MyCarContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoPadrao")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
