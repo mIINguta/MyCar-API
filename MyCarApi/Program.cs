@@ -1,5 +1,4 @@
 
-
 using Microsoft.EntityFrameworkCore;
 using MyCarApi.Context;
 
@@ -20,4 +19,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseEndpoints(endpoints =>{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home} / {action= Index} / {id?}");
+});
 app.Run();
