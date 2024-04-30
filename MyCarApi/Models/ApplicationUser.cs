@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MyCarApi.Models
 {
-    public class AplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        
+       
     }
 }
