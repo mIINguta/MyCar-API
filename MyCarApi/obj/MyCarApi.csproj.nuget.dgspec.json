@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj": {}
+    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar-api\\MyCarApi\\MyCarApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj": {
+    "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar-api\\MyCarApi\\MyCarApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj",
+        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar-api\\MyCarApi\\MyCarApi.csproj",
         "projectName": "MyCarApi",
-        "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj",
+        "projectPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar-api\\MyCarApi\\MyCarApi.csproj",
         "packagesPath": "C:\\Users\\gusta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\obj\\",
+        "outputPath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar-api\\MyCarApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gusta\\AppData\\Roaming\\NuGet\\NuGet.Config",

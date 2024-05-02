@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EB1uc/Rt/UfGVn0pfUX2VmKg2Nue93rGqtXwj0rQD0TFdlqFml7hdwP21xF5x5jG93Ol304hs8DhE3+33jLSrQ==",
+  "dgSpecHash": "JLLdsAS5bd18j5mjBI11gCIxXs3Aj7B6ZE8nN5HLFa2hqdbNQTNtJkEWFVqvOYgpRJSKVMbp0S2CH2eQjo7/Zw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar\\MyCarApi\\MyCarApi.csproj",
+  "projectFilePath": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Dev\\MyCar-api\\MyCarApi\\MyCarApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gusta\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\gusta\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
