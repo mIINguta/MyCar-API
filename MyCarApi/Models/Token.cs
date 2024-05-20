@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 
 namespace MyCarApi.Models
 {
-    public class UserToken 
+    public class Token
     {
-        public string Token { get; set; }
-        public DateTime Expiration { get; set; }
-    
+        public string AcessToken { get; set; }
+        public string Expiration { get; set; }
     }
-
-    
 }

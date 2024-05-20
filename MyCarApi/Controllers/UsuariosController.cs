@@ -7,24 +7,30 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MyCarApi.Context;
 using MyCarApi.Models;
 
 namespace MyCarApi.Controllers
 {
     
-    [Route("[controller]")]
+    [Route("users")]
     [ApiController]
     public class UsuariosController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly MyCarContext _myCarContext;
+
+        private Token _token;
         
-        public UsuariosController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration){
+        public UsuariosController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, MyCarContext myCarContext){
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _myCarContext = myCarContext;
         }
 
         [HttpPost("Registrar")]
@@ -49,9 +55,12 @@ namespace MyCarApi.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<UserToken>> Login([FromBody] User userInfo){
             var result = await _signInManager.PasswordSignInAsync(userInfo.Email, userInfo.Senha, isPersistent: false, lockoutOnFailure: false);
-
+            
             if(result.Succeeded){
-                return BuildToken(userInfo);
+                // var senha = await _userManager.FindByEmailAsync(userInfo.Email);//pegando id do usuario
+                UserToken token = BuildToken(userInfo);
+                return Ok(BuildToken(userInfo));
+
             }
             else
             {
@@ -77,10 +86,11 @@ namespace MyCarApi.Controllers
                 expires: expiration,
                 signingCredentials: creds);
 
+
                 return new UserToken(){
-                    Token = new JwtSecurityTokenHandler().WriteToken(token), Expiration = expiration
+                    Token = new JwtSecurityTokenHandler().WriteToken(token), 
+                    Expiration = expiration
                 };
-           
            }
 
 

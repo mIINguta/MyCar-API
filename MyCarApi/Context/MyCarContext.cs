@@ -6,9 +6,12 @@ using MyCarApi.Models;
 
 namespace MyCarApi.Context
 {
-    public class MyCarContext : IdentityDbContext<ApplicationUser>   {
+    public class MyCarContext : IdentityDbContext<ApplicationUser> {
         public MyCarContext(DbContextOptions<MyCarContext> options) : base(options){
+            
             }
+            public DbSet<Car> Cars  {get; set;}
+            public DbSet<Manutencao> Manutencoes {get; set;}
         
     }
 }

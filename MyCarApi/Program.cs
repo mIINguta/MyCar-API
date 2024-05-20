@@ -37,7 +37,6 @@ builder.Services.AddAuthorization(options =>
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddControllers();
-
     var app = builder.Build();
 
 // cors que possibilita consumir a api com o endereço da aplicação react

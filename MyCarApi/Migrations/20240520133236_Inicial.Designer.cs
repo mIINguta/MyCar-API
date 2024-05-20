@@ -12,8 +12,8 @@ using MyCarApi.Context;
 namespace MyCarApi.Migrations
 {
     [DbContext(typeof(MyCarContext))]
-    [Migration("20240429205408_MyCarMigrations")]
-    partial class MyCarMigrations
+    [Migration("20240520133236_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -223,6 +223,67 @@ namespace MyCarApi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("MyCarApi.Models.Car", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AnoFabricacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Kilometragem")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("MyCarApi.Models.Manutencao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Car")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KmMax")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KmTroca")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Valor")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Manutencoes");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -272,6 +333,18 @@ namespace MyCarApi.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MyCarApi.Models.Manutencao", b =>
+                {
+                    b.HasOne("MyCarApi.Models.Car", null)
+                        .WithMany("IdManutencao")
+                        .HasForeignKey("CarId");
+                });
+
+            modelBuilder.Entity("MyCarApi.Models.Car", b =>
+                {
+                    b.Navigation("IdManutencao");
                 });
 #pragma warning restore 612, 618
         }
