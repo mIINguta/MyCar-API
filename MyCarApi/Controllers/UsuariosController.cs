@@ -93,6 +93,14 @@ namespace MyCarApi.Controllers
                 };
            }
 
+           [HttpGet("ReceberDadosUsuario")]
+           public async Task<IQueryable<ApplicationUser>> ReceberDados(string email){
+                var result = _myCarContext.Users.Where(x => x.Email == email);
+                
+                return result;
+             
+                }
+           }
+
 
         }
-    }

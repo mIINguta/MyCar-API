@@ -18,8 +18,8 @@ namespace MyCarApi.Context
             builder.HasOne(x => x.Manutencoes);
         }
         public void Configure(EntityTypeBuilder<ApplicationUser> builder){
-            builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Cars);
+            builder.HasKey(x => x.Id); // aplication user é a classe que o dotnet usa p usuario.
+            builder.HasOne(x => x.Cars); // referenciando chave estrangeira
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

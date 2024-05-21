@@ -16,7 +16,7 @@ namespace MyCarApi.Models
         public int AnoFabricacao {get; set;}
         public int Kilometragem {get; set;}
 
-        public int id_carro_usuario {get;set;}
+        public string id_carro_usuario {get;set;}
 
         [ForeignKey("id_carro")]
         public virtual ICollection<Manutencao> Manutencoes {get; set;}
