@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyCarApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class newMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,22 +48,6 @@ namespace MyCarApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cars",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AnoFabricacao = table.Column<int>(type: "int", nullable: false),
-                    Kilometragem = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,6 +157,28 @@ namespace MyCarApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnoFabricacao = table.Column<int>(type: "int", nullable: false),
+                    Kilometragem = table.Column<int>(type: "int", nullable: false),
+                    id_carro_usuario = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_AspNetUsers_id_carro_usuario",
+                        column: x => x.id_carro_usuario,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Manutencoes",
                 columns: table => new
                 {
@@ -182,17 +188,17 @@ namespace MyCarApi.Migrations
                     Valor = table.Column<double>(type: "float", nullable: false),
                     KmTroca = table.Column<int>(type: "int", nullable: false),
                     KmMax = table.Column<int>(type: "int", nullable: false),
-                    Car = table.Column<int>(type: "int", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: true)
+                    id_carro = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Manutencoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Manutencoes_Cars_CarId",
-                        column: x => x.CarId,
+                        name: "FK_Manutencoes_Cars_id_carro",
+                        column: x => x.id_carro,
                         principalTable: "Cars",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -235,9 +241,14 @@ namespace MyCarApi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Manutencoes_CarId",
+                name: "IX_Cars_id_carro_usuario",
+                table: "Cars",
+                column: "id_carro_usuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Manutencoes_id_carro",
                 table: "Manutencoes",
-                column: "CarId");
+                column: "id_carro");
         }
 
         /// <inheritdoc />
@@ -265,10 +276,10 @@ namespace MyCarApi.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "Cars");
+                name: "AspNetUsers");
         }
     }
 }

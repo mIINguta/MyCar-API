@@ -12,8 +12,8 @@ using MyCarApi.Context;
 namespace MyCarApi.Migrations
 {
     [DbContext(typeof(MyCarContext))]
-    [Migration("20240520133236_Inicial")]
-    partial class Inicial
+    [Migration("20240521124649_newMigration")]
+    partial class newMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,7 +245,12 @@ namespace MyCarApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("id_carro_usuario")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("id_carro_usuario");
 
                     b.ToTable("Cars");
                 });
@@ -257,12 +262,6 @@ namespace MyCarApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Car")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CarId")
-                        .HasColumnType("int");
 
                     b.Property<int>("KmMax")
                         .HasColumnType("int");
@@ -277,9 +276,12 @@ namespace MyCarApi.Migrations
                     b.Property<double>("Valor")
                         .HasColumnType("float");
 
+                    b.Property<int>("id_carro")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("id_carro");
 
                     b.ToTable("Manutencoes");
                 });
@@ -335,16 +337,30 @@ namespace MyCarApi.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyCarApi.Models.Car", b =>
+                {
+                    b.HasOne("MyCarApi.Models.ApplicationUser", null)
+                        .WithMany("Cars")
+                        .HasForeignKey("id_carro_usuario");
+                });
+
             modelBuilder.Entity("MyCarApi.Models.Manutencao", b =>
                 {
                     b.HasOne("MyCarApi.Models.Car", null)
-                        .WithMany("IdManutencao")
-                        .HasForeignKey("CarId");
+                        .WithMany("Manutencoes")
+                        .HasForeignKey("id_carro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MyCarApi.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("MyCarApi.Models.Car", b =>
                 {
-                    b.Navigation("IdManutencao");
+                    b.Navigation("Manutencoes");
                 });
 #pragma warning restore 612, 618
         }

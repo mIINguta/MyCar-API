@@ -57,7 +57,7 @@ namespace MyCarApi.Controllers
             var result = await _signInManager.PasswordSignInAsync(userInfo.Email, userInfo.Senha, isPersistent: false, lockoutOnFailure: false);
             
             if(result.Succeeded){
-                // var senha = await _userManager.FindByEmailAsync(userInfo.Email);//pegando id do usuario
+                var senha = await _userManager.FindByEmailAsync(userInfo.Email);//pegando id do usuario
                 UserToken token = BuildToken(userInfo);
                 return Ok(BuildToken(userInfo));
 
