@@ -25,12 +25,17 @@ namespace MyCarApi.Controllers
 
         public async Task<OkObjectResult> RegistrarManutencao([FromBody] Manutencao manutencao, [FromServices] UserToken token)
         {
-
-            
             _myCarContext.Manutencoes.Add(manutencao);
             _myCarContext.SaveChanges();
-
             return Ok("Funcionou perfeito!");
+        }
+
+        [HttpGet("ConsultarManutencoes")]
+        [Authorize]
+
+        public async Task<IQueryable> ConsultarManutencoes (int idCarro){
+            var manutencoes = _myCarContext.Manutencoes.Where(x => idCarro == x.id_carro);
+            return manutencoes;
         }
     }
 }

@@ -31,6 +31,13 @@ namespace MyCarApi.Controllers
 
             return Ok("GG");
         }
+        [Authorize]
+        [HttpGet("ConsultarCarrosUsuario")]
+        public async Task<IQueryable> ConsultarCarros (string id){
+            var carros = _myCarContext.Cars.Where(x => x.id_carro_usuario == id);
+
+            return carros;
+        }
         
     }
 }
