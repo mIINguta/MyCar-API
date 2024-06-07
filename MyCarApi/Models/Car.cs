@@ -16,9 +16,11 @@ namespace MyCarApi.Models
         public int AnoFabricacao {get; set;}
         public int Kilometragem {get; set;}
 
-        public string id_carro_usuario {get;set;}
+        public int KilometragemAtual {get;set;} 
 
-        [ForeignKey("id_carro")]
+        public string IdUsuario {get;set;}
+        
+        [ForeignKey("IdCarro")] 
         public virtual ICollection<Manutencao> Manutencoes {get; set;}
         // um carro pode ter uma ou mais manutenções, então declaro essa Icollection aqui pois ela irá gerar uma chave estrangeira na tabela manutenções
     }

@@ -10,7 +10,7 @@ namespace MyCarApi.Models
     public class ApplicationUser : IdentityUser
     {
        
-        [ForeignKey("id_carro_usuario")]
+        [ForeignKey("IdUsuario")]
         public virtual ICollection<Car> Cars {get;set;}
     }
 }

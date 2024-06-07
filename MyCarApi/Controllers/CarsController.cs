@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MyCarApi.Context;
 using MyCarApi.Models;
 
@@ -20,8 +22,6 @@ namespace MyCarApi.Controllers
         public CarsController (MyCarContext myCarContext){
             _myCarContext = myCarContext;
         }
-        
-        
         [Authorize]
         [HttpPost("RegistrarCarro")]
         public async Task<OkObjectResult> RegistrarCarro([FromBody] Car carInfo, [FromServices] UserToken token){
@@ -34,9 +34,20 @@ namespace MyCarApi.Controllers
         [Authorize]
         [HttpGet("ConsultarCarrosUsuario")]
         public async Task<IQueryable> ConsultarCarros (string id){
-            var carros = _myCarContext.Cars.Where(x => x.id_carro_usuario == id);
 
-            return carros;
+            var carros = 
+            from M in _myCarContext.Manutencoes 
+            join C in _myCarContext.Cars on M.IdCarro equals C.Id
+            where C.IdUsuario == id
+            select new { 
+                    id = C.Id,
+                    nome = C.Nome,
+                    marca = C.Marca,
+                    kilometragem = C.Kilometragem,
+                    usuario = C.IdUsuario,
+                    manutencoes = M
+            };
+            return  carros;
         }
         
     }

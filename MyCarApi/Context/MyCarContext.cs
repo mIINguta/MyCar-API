@@ -25,5 +25,10 @@ namespace MyCarApi.Context
         {
             base.OnModelCreating(builder);
         }
+
+        internal object Join(IQueryable<Car> cars, Func<object, object> value1, Func<Car, ICollection<Manutencao>> value2, Func<object, object, object> value3)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

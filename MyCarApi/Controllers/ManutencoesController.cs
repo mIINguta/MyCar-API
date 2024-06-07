@@ -25,6 +25,8 @@ namespace MyCarApi.Controllers
 
         public async Task<OkObjectResult> RegistrarManutencao([FromBody] Manutencao manutencao, [FromServices] UserToken token)
         {
+    
+            manutencao.DataManutencao.ToString("dd/MM/yy : hh:mm");
             _myCarContext.Manutencoes.Add(manutencao);
             _myCarContext.SaveChanges();
             return Ok("Funcionou perfeito!");
@@ -34,7 +36,7 @@ namespace MyCarApi.Controllers
         [Authorize]
 
         public async Task<IQueryable> ConsultarManutencoes (int idCarro){
-            var manutencoes = _myCarContext.Manutencoes.Where(x => idCarro == x.id_carro);
+            var manutencoes = _myCarContext.Manutencoes.Where(x => idCarro == x.IdCarro);
             return manutencoes;
         }
     }

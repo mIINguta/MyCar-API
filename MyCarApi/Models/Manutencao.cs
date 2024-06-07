@@ -13,11 +13,12 @@ namespace MyCarApi.Models
         public int Id{get; set;}
         public string Nome{get; set;}
         public double Valor{get; set;}
+        public DateTime DataManutencao {get;set;}
         public int KmTroca{get; set;}
 
         public int KmMax {get;set;}
 
-        public int id_carro {get;set;}
+        public int IdCarro {get;set;}
         // para que a minha classe disponibilize no JSON receber um id para a chave estrangeira
 
 

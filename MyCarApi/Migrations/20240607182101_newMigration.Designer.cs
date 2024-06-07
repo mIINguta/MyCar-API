@@ -12,7 +12,7 @@ using MyCarApi.Context;
 namespace MyCarApi.Migrations
 {
     [DbContext(typeof(MyCarContext))]
-    [Migration("20240521124649_newMigration")]
+    [Migration("20240607182101_newMigration")]
     partial class newMigration
     {
         /// <inheritdoc />
@@ -234,7 +234,14 @@ namespace MyCarApi.Migrations
                     b.Property<int>("AnoFabricacao")
                         .HasColumnType("int");
 
+                    b.Property<string>("IdUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Kilometragem")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KilometragemAtual")
                         .HasColumnType("int");
 
                     b.Property<string>("Marca")
@@ -245,12 +252,9 @@ namespace MyCarApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("id_carro_usuario")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("id_carro_usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("Cars");
                 });
@@ -262,6 +266,12 @@ namespace MyCarApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataManutencao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCarro")
+                        .HasColumnType("int");
 
                     b.Property<int>("KmMax")
                         .HasColumnType("int");
@@ -276,12 +286,9 @@ namespace MyCarApi.Migrations
                     b.Property<double>("Valor")
                         .HasColumnType("float");
 
-                    b.Property<int>("id_carro")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("id_carro");
+                    b.HasIndex("IdCarro");
 
                     b.ToTable("Manutencoes");
                 });
@@ -341,14 +348,16 @@ namespace MyCarApi.Migrations
                 {
                     b.HasOne("MyCarApi.Models.ApplicationUser", null)
                         .WithMany("Cars")
-                        .HasForeignKey("id_carro_usuario");
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MyCarApi.Models.Manutencao", b =>
                 {
                     b.HasOne("MyCarApi.Models.Car", null)
                         .WithMany("Manutencoes")
-                        .HasForeignKey("id_carro")
+                        .HasForeignKey("IdCarro")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

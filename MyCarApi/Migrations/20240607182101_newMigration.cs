@@ -166,16 +166,18 @@ namespace MyCarApi.Migrations
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AnoFabricacao = table.Column<int>(type: "int", nullable: false),
                     Kilometragem = table.Column<int>(type: "int", nullable: false),
-                    id_carro_usuario = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    KilometragemAtual = table.Column<int>(type: "int", nullable: false),
+                    IdUsuario = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_AspNetUsers_id_carro_usuario",
-                        column: x => x.id_carro_usuario,
+                        name: "FK_Cars_AspNetUsers_IdUsuario",
+                        column: x => x.IdUsuario,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,16 +188,17 @@ namespace MyCarApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Valor = table.Column<double>(type: "float", nullable: false),
+                    DataManutencao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     KmTroca = table.Column<int>(type: "int", nullable: false),
                     KmMax = table.Column<int>(type: "int", nullable: false),
-                    id_carro = table.Column<int>(type: "int", nullable: false)
+                    IdCarro = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Manutencoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Manutencoes_Cars_id_carro",
-                        column: x => x.id_carro,
+                        name: "FK_Manutencoes_Cars_IdCarro",
+                        column: x => x.IdCarro,
                         principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -241,14 +244,14 @@ namespace MyCarApi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_id_carro_usuario",
+                name: "IX_Cars_IdUsuario",
                 table: "Cars",
-                column: "id_carro_usuario");
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Manutencoes_id_carro",
+                name: "IX_Manutencoes_IdCarro",
                 table: "Manutencoes",
-                column: "id_carro");
+                column: "IdCarro");
         }
 
         /// <inheritdoc />
