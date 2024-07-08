@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -34,21 +35,23 @@ namespace MyCarApi.Controllers
         [Authorize]
         [HttpGet("ConsultarCarrosUsuario")]
         public async Task<IQueryable> ConsultarCarros (string id){
-
-            var carros = 
+          
+            var carros = (
             from M in _myCarContext.Manutencoes 
-            join C in _myCarContext.Cars on M.IdCarro equals C.Id
-            where C.IdUsuario == id
-            select new { 
+            from C in _myCarContext.Cars
+            where C.IdUsuario == id 
+            select new {
                     id = C.Id,
                     nome = C.Nome,
                     marca = C.Marca,
                     kilometragem = C.Kilometragem,
                     usuario = C.IdUsuario,
-                    manutencoes = M
-            };
-            return  carros;
+                    anoFabricacao = C.AnoFabricacao,
+                    manutencoes = C.Manutencoes
+            }); // C.manutencoes recebe as manutencoes como chave
+
+            return carros;
         }
-        
+
     }
 }

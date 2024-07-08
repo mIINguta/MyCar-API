@@ -23,10 +23,8 @@ namespace MyCarApi.Controllers
         [HttpPost("RegistrarManutencao")]
         [Authorize]
 
-        public async Task<OkObjectResult> RegistrarManutencao([FromBody] Manutencao manutencao, [FromServices] UserToken token)
+        public async Task<OkObjectResult> RegistrarManutencao([FromBody] Manutencao manutencao)
         {
-    
-            manutencao.DataManutencao.ToString("dd/MM/yy : hh:mm");
             _myCarContext.Manutencoes.Add(manutencao);
             _myCarContext.SaveChanges();
             return Ok("Funcionou perfeito!");
@@ -39,5 +37,6 @@ namespace MyCarApi.Controllers
             var manutencoes = _myCarContext.Manutencoes.Where(x => idCarro == x.IdCarro);
             return manutencoes;
         }
+
     }
 }

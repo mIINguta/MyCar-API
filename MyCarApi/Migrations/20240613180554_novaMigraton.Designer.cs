@@ -12,8 +12,8 @@ using MyCarApi.Context;
 namespace MyCarApi.Migrations
 {
     [DbContext(typeof(MyCarContext))]
-    [Migration("20240607182101_newMigration")]
-    partial class newMigration
+    [Migration("20240613180554_novaMigraton")]
+    partial class novaMigraton
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -267,8 +267,9 @@ namespace MyCarApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DataManutencao")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DataManutencao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdCarro")
                         .HasColumnType("int");

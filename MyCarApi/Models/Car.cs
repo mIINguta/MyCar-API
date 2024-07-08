@@ -15,9 +15,7 @@ namespace MyCarApi.Models
         public string Marca {get; set;}
         public int AnoFabricacao {get; set;}
         public int Kilometragem {get; set;}
-
         public int KilometragemAtual {get;set;} 
-
         public string IdUsuario {get;set;}
         
         [ForeignKey("IdCarro")] 

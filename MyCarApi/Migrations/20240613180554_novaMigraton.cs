@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyCarApi.Migrations
 {
     /// <inheritdoc />
-    public partial class newMigration : Migration
+    public partial class novaMigraton : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -188,7 +188,7 @@ namespace MyCarApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Valor = table.Column<double>(type: "float", nullable: false),
-                    DataManutencao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataManutencao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KmTroca = table.Column<int>(type: "int", nullable: false),
                     KmMax = table.Column<int>(type: "int", nullable: false),
                     IdCarro = table.Column<int>(type: "int", nullable: false)

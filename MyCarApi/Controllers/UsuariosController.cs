@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -100,7 +102,44 @@ namespace MyCarApi.Controllers
                 return result;
              
                 }
-           }
 
+
+        [HttpPut("AtualizarNome")]
+        [Authorize]
+        public IActionResult AtualizarNome(string nome, string id)
+        {
+            var result = _myCarContext.Users.Find(id);
+            result.NormalizedUserName = nome;
+            _myCarContext.SaveChanges();
+            return Ok("Funcionou");
+        }
+
+        [HttpPut("AtualizarDados")]
+        [Authorize]
+
+        public async Task<IActionResult> UpdateData(string name, string email, string password, string newPassword, string id){
+            var user = _myCarContext.Users.Find(id);
+            
+            
+            if(user.Email == email && password == newPassword){
+                user.UserName = name;
+                user.NormalizedEmail = email;
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, newPassword);
+                var result = await _userManager.UpdateAsync(user);
+            
+                if(result.Succeeded){
+                    _myCarContext.SaveChanges();
+                    return Ok("A atualização da senha foi um sucesso!");   
+                }
+                else
+                    return Ok ("Algo de errado aconteceu");
+                
+            }
+
+            return Ok("Rodou");
 
         }
+       
+    }
+}
+            
