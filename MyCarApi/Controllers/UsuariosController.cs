@@ -45,7 +45,6 @@ namespace MyCarApi.Controllers
            
            var result = await _userManager.CreateAsync(user, userModel.Senha); // o erro era porque a senha não tinha caracter especial, uma letra maiúscula e minúscula.
            
-
            if (result.Succeeded){
             return BuildToken(userModel);
            }
@@ -88,30 +87,28 @@ namespace MyCarApi.Controllers
                 expires: expiration,
                 signingCredentials: creds);
 
-
                 return new UserToken(){
                     Token = new JwtSecurityTokenHandler().WriteToken(token), 
                     Expiration = expiration
                 };
            }
 
-           [HttpGet("ReceberDadosUsuario")]
-           public async Task<IQueryable<ApplicationUser>> ReceberDados(string email){
-                var result = _myCarContext.Users.Where(x => x.Email == email);
-                
-                return result;
-             
-                }
+        [HttpGet("ReceberDadosUsuario")]
+        public IQueryable<ApplicationUser> ReceberDados(string usuario)
+        {
+            var result = _myCarContext.Users.Where(x => x.NormalizedUserName.ToLower() == usuario.ToLower());
+            return result;
 
+        }
 
         [HttpPut("AtualizarNome")]
         [Authorize]
-        public IActionResult AtualizarNome(string nome, string id)
+        public IActionResult AtualizarNome(string name, string id)
         {
             var result = _myCarContext.Users.Find(id);
-            result.NormalizedUserName = nome;
+            result.NormalizedUserName = name;
             _myCarContext.SaveChanges();
-            return Ok("Funcionou");
+            return Ok("O nome foi atualizado com sucesso");
         }
 
         [HttpPut("AtualizarDados")]
@@ -123,7 +120,6 @@ namespace MyCarApi.Controllers
             
             if(user.Email == email && password == newPassword){
                 user.UserName = name;
-                user.NormalizedEmail = email;
                 user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, newPassword);
                 var result = await _userManager.UpdateAsync(user);
             
@@ -132,10 +128,9 @@ namespace MyCarApi.Controllers
                     return Ok("A atualização da senha foi um sucesso!");   
                 }
                 else
-                    return Ok ("Algo de errado aconteceu");
-                
-            }
+                    return Ok("Algo de errado aconteceu");
 
+            }
             return Ok("Rodou");
 
         }
