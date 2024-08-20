@@ -37,6 +37,25 @@ namespace MyCarApi.Controllers
             var manutencoes = _myCarContext.Manutencoes.Where(x => idCarro == x.IdCarro);
             return manutencoes;
         }
+   
+        [HttpDelete("DeletarManutencao")]
+        [Authorize]
 
-    }
+        public IActionResult DeletarManutencao (int id){
+            var manutencao = _myCarContext.Manutencoes.Find(id);
+
+            if(manutencao == null){
+                return NotFound();
+            }
+
+            _myCarContext.Manutencoes.Remove(manutencao);
+            _myCarContext.SaveChanges();
+
+            return Ok();
+
+
+
+        }
+        
+     }
 }

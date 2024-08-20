@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MyCarApi.Context;
@@ -53,6 +54,21 @@ namespace MyCarApi.Controllers
             // C.manutencoes recebe as manutencoes como chave
 
             return carros;
+        }
+
+        [Authorize]
+        [HttpDelete("DeletarCarro")]
+
+        public IActionResult DeletarCarro (int id){
+           var carro = _myCarContext.Cars.Find(id);
+
+            if (carro == null){
+                return NotFound();
+            }
+          
+                _myCarContext.Cars.Remove(carro);
+                _myCarContext.SaveChanges();
+                return Ok();
         }
 
     }
