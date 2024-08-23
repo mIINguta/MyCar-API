@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyCarApi.Migrations
 {
     /// <inheritdoc />
-    public partial class novaMigraton : Migration
+    public partial class newMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -162,11 +162,12 @@ namespace MyCarApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Placa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AnoFabricacao = table.Column<int>(type: "int", nullable: false),
-                    Kilometragem = table.Column<int>(type: "int", nullable: false),
-                    KilometragemAtual = table.Column<int>(type: "int", nullable: false),
+                    QuilometragemCompra = table.Column<int>(type: "int", nullable: false),
+                    QuilometragemAtual = table.Column<int>(type: "int", nullable: false),
                     IdUsuario = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -186,11 +187,11 @@ namespace MyCarApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Valor = table.Column<double>(type: "float", nullable: false),
                     DataManutencao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KmTroca = table.Column<int>(type: "int", nullable: false),
-                    KmMax = table.Column<int>(type: "int", nullable: false),
+                    QuilometragemAtual = table.Column<int>(type: "int", nullable: false),
+                    QuilometragemMaxima = table.Column<int>(type: "int", nullable: false),
                     IdCarro = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

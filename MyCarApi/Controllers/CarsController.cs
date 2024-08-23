@@ -44,9 +44,10 @@ namespace MyCarApi.Controllers
             select new
             {
                 id = C.Id,
-                nome = C.Nome,
+                nome = C.Modelo,
                 marca = C.Marca,
-                kilometragem = C.Kilometragem,
+                kilometragem = C.QuilometragemCompra,
+                kilometragemAtual = C.QuilometragemAtual,
                 usuario = C.IdUsuario,
                 anoFabricacao = C.AnoFabricacao,
                 manutencoes = C.Manutencoes
@@ -54,6 +55,20 @@ namespace MyCarApi.Controllers
             // C.manutencoes recebe as manutencoes como chave
 
             return carros;
+        }
+        [Authorize]
+        [HttpPut("AtualizarKilometragem")]
+
+        public IActionResult AtualizarKilometragem(int id, int QuilometragemAtual){
+            var carro = _myCarContext.Cars.Find(id);
+
+            if(carro == null){
+                return NotFound();
+            }
+
+            carro.QuilometragemAtual = QuilometragemAtual;
+            _myCarContext.SaveChanges();
+            return Ok("A quilometragem foi atualizada!");
         }
 
         [Authorize]

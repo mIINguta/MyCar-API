@@ -235,19 +235,23 @@ namespace MyCarApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Kilometragem")
-                        .HasColumnType("int");
-
-                    b.Property<int>("KilometragemAtual")
-                        .HasColumnType("int");
-
                     b.Property<string>("Marca")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Placa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuilometragemAtual")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuilometragemCompra")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -268,18 +272,18 @@ namespace MyCarApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("IdCarro")
                         .HasColumnType("int");
 
-                    b.Property<int>("KmMax")
+                    b.Property<int>("QuilometragemAtual")
                         .HasColumnType("int");
 
-                    b.Property<int>("KmTroca")
+                    b.Property<int>("QuilometragemMaxima")
                         .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Valor")
                         .HasColumnType("float");

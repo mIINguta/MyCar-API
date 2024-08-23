@@ -37,7 +37,29 @@ namespace MyCarApi.Controllers
             var manutencoes = _myCarContext.Manutencoes.Where(x => idCarro == x.IdCarro);
             return manutencoes;
         }
-   
+    
+        [HttpPut("EditarManutencao")]
+        [Authorize]
+
+        public IActionResult EditarManutencao([FromBody] Manutencao manutencao){
+            var manutencaoEncontrada = _myCarContext.Manutencoes.Find(manutencao.Id);
+
+            if (manutencaoEncontrada == null){
+                return NotFound();
+            }
+
+            manutencaoEncontrada.Descricao = manutencao.Descricao;
+            manutencaoEncontrada.DataManutencao = manutencao.DataManutencao;
+            manutencaoEncontrada.Valor = manutencao.Valor;
+            manutencaoEncontrada.QuilometragemAtual = manutencao.QuilometragemAtual;
+            manutencaoEncontrada.QuilometragemMaxima = manutencao.QuilometragemMaxima;
+            _myCarContext.SaveChanges();
+
+            return Ok("Os dados foram atualizados");
+
+        }
+
+
         [HttpDelete("DeletarManutencao")]
         [Authorize]
 

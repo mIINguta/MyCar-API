@@ -11,11 +11,12 @@ namespace MyCarApi.Models
     {
         [Key]
         public int Id{get; set;} // definimos como primary key, porém, na hora de passar o JSON, não preciso passar o ID, pq o EF entende como auto increment.
-        public string Nome {get; set;}
+        public string Modelo {get; set;}
         public string Marca {get; set;}
+        public string Placa {get; set;}
         public int AnoFabricacao {get; set;}
-        public int Kilometragem {get; set;}
-        public int KilometragemAtual {get;set;} 
+        public int QuilometragemCompra {get; set;}
+        public int QuilometragemAtual {get; set;} 
         public string IdUsuario {get;set;}
         
         [ForeignKey("IdCarro")] 
