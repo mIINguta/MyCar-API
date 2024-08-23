@@ -44,10 +44,11 @@ namespace MyCarApi.Controllers
             select new
             {
                 id = C.Id,
-                nome = C.Modelo,
+                modelo = C.Modelo,
                 marca = C.Marca,
-                kilometragem = C.QuilometragemCompra,
-                kilometragemAtual = C.QuilometragemAtual,
+                placa = C.Placa,
+                quilometragemCompra = C.QuilometragemCompra,
+                quilometragemAtual = C.QuilometragemAtual,
                 usuario = C.IdUsuario,
                 anoFabricacao = C.AnoFabricacao,
                 manutencoes = C.Manutencoes
