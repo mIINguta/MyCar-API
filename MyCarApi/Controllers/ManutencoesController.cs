@@ -20,7 +20,7 @@ namespace MyCarApi.Controllers
             _myCarContext = myCarContext;
         }
 
-        [HttpPost("RegistrarManutencao")]
+        [HttpPost("maintenance")]
         [Authorize]
 
         public async Task<OkObjectResult> RegistrarManutencao([FromBody] Manutencao manutencao)
@@ -30,7 +30,7 @@ namespace MyCarApi.Controllers
             return Ok("Funcionou perfeito!");
         }
 
-        [HttpGet("ConsultarManutencoes")]
+        [HttpGet("maintenances")]
         [Authorize]
 
         public async Task<IQueryable> ConsultarManutencoes (int idCarro){
@@ -38,7 +38,7 @@ namespace MyCarApi.Controllers
             return manutencoes;
         }
     
-        [HttpPut("EditarManutencao")]
+        [HttpPut("maintenance")]
         [Authorize]
 
         public IActionResult EditarManutencao([FromBody] Manutencao manutencao){
@@ -60,7 +60,7 @@ namespace MyCarApi.Controllers
         }
 
 
-        [HttpDelete("DeletarManutencao")]
+        [HttpDelete("maintenance")]
         [Authorize]
 
         public IActionResult DeletarManutencao (int id){

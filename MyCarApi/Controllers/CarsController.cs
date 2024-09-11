@@ -25,7 +25,7 @@ namespace MyCarApi.Controllers
             _myCarContext = myCarContext;
         }
         [Authorize]
-        [HttpPost("RegistrarCarro")]
+        [HttpPost("car")]
         public async Task<OkObjectResult> RegistrarCarro([FromBody] Car carInfo, [FromServices] UserToken token){
             
            _myCarContext.Cars.Add(carInfo);
@@ -34,7 +34,7 @@ namespace MyCarApi.Controllers
             return Ok("GG");
         }
         [Authorize]
-        [HttpGet("ConsultarCarrosUsuario")]
+        [HttpGet("cars")]
         public async Task<IQueryable> ConsultarCarros(string id)
         {
 
@@ -58,22 +58,25 @@ namespace MyCarApi.Controllers
             return carros;
         }
         [Authorize]
-        [HttpPut("AtualizarKilometragem")]
+        [HttpPut("quilometragem")]
 
-        public IActionResult AtualizarKilometragem(int id, int QuilometragemAtual){
+        public IActionResult AtualizarQuilometragem(int id, int quilometragemAtual){
+            Console.Write("Esse é o id do carro " + id + "\n");
+            Console.Write("Essa é a quilometragem " + quilometragemAtual + "\n");
+
             var carro = _myCarContext.Cars.Find(id);
 
             if(carro == null){
                 return NotFound();
             }
 
-            carro.QuilometragemAtual = QuilometragemAtual;
+            carro.QuilometragemAtual = quilometragemAtual;
             _myCarContext.SaveChanges();
             return Ok("A quilometragem foi atualizada!");
         }
 
         [Authorize]
-        [HttpDelete("DeletarCarro")]
+        [HttpDelete("car")]
 
         public IActionResult DeletarCarro (int id){
            var carro = _myCarContext.Cars.Find(id);

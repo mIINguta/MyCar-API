@@ -35,7 +35,7 @@ namespace MyCarApi.Controllers
             _myCarContext = myCarContext;
         }
 
-        [HttpPost("Registrar")]
+        [HttpPost("register")]
         public async Task <ActionResult<UserToken>> CreateUser([FromBody] User userModel){
            
            var user = new ApplicationUser {
@@ -53,7 +53,7 @@ namespace MyCarApi.Controllers
            }
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<ActionResult<UserToken>> Login([FromBody] User userInfo){
             var result = await _signInManager.PasswordSignInAsync(userInfo.Email, userInfo.Senha, isPersistent: false, lockoutOnFailure: false);
             
@@ -93,7 +93,7 @@ namespace MyCarApi.Controllers
                 };
            }
 
-        [HttpGet("ReceberDadosUsuario")]
+        [HttpGet("users")]
         public IQueryable<ApplicationUser> ReceberDados(string usuario)
         {
             var result = _myCarContext.Users.Where(x => x.NormalizedUserName.ToLower() == usuario.ToLower());
@@ -101,7 +101,7 @@ namespace MyCarApi.Controllers
 
         }
 
-        [HttpPut("AtualizarNome")]
+        [HttpPut("userName")]
         [Authorize]
         public IActionResult AtualizarNome(string name, string id)
         {
@@ -111,7 +111,7 @@ namespace MyCarApi.Controllers
             return Ok("O nome foi atualizado com sucesso");
         }
 
-        [HttpPut("AtualizarDados")]
+        [HttpPut("data")]
         [Authorize]
 
         public async Task<IActionResult> UpdateData(string name, string email, string password, string newPassword, string id){

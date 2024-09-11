@@ -21,6 +21,11 @@ namespace MyCarApi.Models
         
         [ForeignKey("IdCarro")] 
         public virtual ICollection<Manutencao> Manutencoes {get; set;}
+
+        public static implicit operator int(Car v)
+        {
+            throw new NotImplementedException();
+        }
         // um carro pode ter uma ou mais manutenções, então declaro essa Icollection aqui pois ela irá gerar uma chave estrangeira na tabela manutenções
     }
 }
