@@ -58,7 +58,7 @@ namespace MyCarApi.Controllers
             return carros;
         }
         [Authorize]
-        [HttpPut("{id}/quilometragem")]
+        [HttpPatch("{id}")]
 
         public IActionResult AtualizarQuilometragem(int id, int quilometragemAtual){
             Console.Write("Esse é o id do carro " + id + "\n");

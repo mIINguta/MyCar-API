@@ -101,7 +101,7 @@ namespace MyCarApi.Controllers
 
         }
 
-        [HttpPut("{id}/username")]
+        [HttpPatch("{id}")]
         [Authorize]
         public IActionResult AtualizarNome(string userName, string id)
         {
