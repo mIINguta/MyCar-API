@@ -10,7 +10,7 @@ using MyCarApi.Models;
 namespace MyCarApi.Controllers
 {
     [ApiController]
-    [Route("/auth/maintence")]
+    [Route("/auth/maintenance")]
     public class ManutencoesController : ControllerBase
     {
         
