@@ -93,7 +93,7 @@ namespace MyCarApi.Controllers
                 };
            }
 
-        [HttpGet("users")]
+        [HttpGet("{usuario}")]
         public IQueryable<ApplicationUser> ReceberDados(string usuario)
         {
             var result = _myCarContext.Users.Where(x => x.NormalizedUserName.ToLower() == usuario.ToLower());
@@ -101,17 +101,17 @@ namespace MyCarApi.Controllers
 
         }
 
-        [HttpPut("userName")]
+        [HttpPut("{id}/username")]
         [Authorize]
-        public IActionResult AtualizarNome(string name, string id)
+        public IActionResult AtualizarNome(string userName, string id)
         {
             var result = _myCarContext.Users.Find(id);
-            result.NormalizedUserName = name;
+            result.NormalizedUserName = userName;
             _myCarContext.SaveChanges();
             return Ok("O nome foi atualizado com sucesso");
         }
 
-        [HttpPut("data")]
+        [HttpPut("{id}")]
         [Authorize]
 
         public async Task<IActionResult> UpdateData(string name, string email, string password, string newPassword, string id){

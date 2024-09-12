@@ -14,7 +14,7 @@ using MyCarApi.Models;
 namespace MyCarApi.Controllers
 {   
     [ApiController]
-    [Route("auth")]
+    [Route("auth/cars")]
     
         public class CarsController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace MyCarApi.Controllers
             _myCarContext = myCarContext;
         }
         [Authorize]
-        [HttpPost("car")]
+        [HttpPost("register")]
         public async Task<OkObjectResult> RegistrarCarro([FromBody] Car carInfo, [FromServices] UserToken token){
             
            _myCarContext.Cars.Add(carInfo);
@@ -34,7 +34,7 @@ namespace MyCarApi.Controllers
             return Ok("GG");
         }
         [Authorize]
-        [HttpGet("cars")]
+        [HttpGet("{id}")]
         public async Task<IQueryable> ConsultarCarros(string id)
         {
 
@@ -58,7 +58,7 @@ namespace MyCarApi.Controllers
             return carros;
         }
         [Authorize]
-        [HttpPut("quilometragem")]
+        [HttpPut("{id}/quilometragem")]
 
         public IActionResult AtualizarQuilometragem(int id, int quilometragemAtual){
             Console.Write("Esse é o id do carro " + id + "\n");
@@ -76,7 +76,7 @@ namespace MyCarApi.Controllers
         }
 
         [Authorize]
-        [HttpDelete("car")]
+        [HttpDelete("{id}")]
 
         public IActionResult DeletarCarro (int id){
            var carro = _myCarContext.Cars.Find(id);

@@ -10,7 +10,7 @@ using MyCarApi.Models;
 namespace MyCarApi.Controllers
 {
     [ApiController]
-    [Route("/auth")]
+    [Route("/auth/maintence")]
     public class ManutencoesController : ControllerBase
     {
         
@@ -20,7 +20,7 @@ namespace MyCarApi.Controllers
             _myCarContext = myCarContext;
         }
 
-        [HttpPost("maintenance")]
+        [HttpPost()]
         [Authorize]
 
         public async Task<OkObjectResult> RegistrarManutencao([FromBody] Manutencao manutencao)
@@ -30,7 +30,7 @@ namespace MyCarApi.Controllers
             return Ok("Funcionou perfeito!");
         }
 
-        [HttpGet("maintenances")]
+        [HttpGet("{idcarro}")]
         [Authorize]
 
         public async Task<IQueryable> ConsultarManutencoes (int idCarro){
@@ -38,7 +38,7 @@ namespace MyCarApi.Controllers
             return manutencoes;
         }
     
-        [HttpPut("maintenance")]
+        [HttpPut("{id}")]
         [Authorize]
 
         public IActionResult EditarManutencao([FromBody] Manutencao manutencao){
@@ -60,7 +60,7 @@ namespace MyCarApi.Controllers
         }
 
 
-        [HttpDelete("maintenance")]
+        [HttpDelete("{id}")]
         [Authorize]
 
         public IActionResult DeletarManutencao (int id){
